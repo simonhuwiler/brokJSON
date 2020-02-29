@@ -10,7 +10,7 @@ function Specification() {
     <div id='specification' className='content'>
       <h2>Specification</h2>
       <p>
-        BrokJSON uses the same way to store geographical information as GeoJSON. Therefore this specification will not describe Geometry Objects. See the <a href='https://tools.ietf.org/html/rfc7946' target='_blank'>GeoJSON Specification</a>. A BrokJSON-Converter is not interested in knowing the Geometry Object Type (Point, Polygone, etc.). It will just take Objects from GeoJSON and convert it to BrokJSON.
+        Every BrokJSON MUST BE a valid JSON object. BrokJSON uses the same way to store geographical information as GeoJSON. Therefore this specification will not describe Geometry Objects. See the <a href='https://tools.ietf.org/html/rfc7946' target='_blank'>GeoJSON Specification</a>. A BrokJSON-Converter is not interested in knowing the Geometry Object Type (Point, Polygone, etc.). It will just take Objects from GeoJSON and convert it to BrokJSON.
       </p>
 
       <h3>The structure</h3>
@@ -49,10 +49,10 @@ function Specification() {
     <Code hideClipboard>["prop1", "prop2"]</Code>
 
     <h3>foreignMembers (Array, optional)</h3>
-    <p>Contains all member keys found on all feature except type, properties and geometry. Can be used to store bbox, id or not defined members.</p>
+    <p>Contains all member keys found on all feature root node except <C>type</C>, <C>properties</C> and <C>geometry</C>. Can be used to store bbox, id or not defined members.</p>
     <p>
       <b>Example:</b><br />
-      In GeoJSON, geometry-Data should be stored under <C>property</C>. But sometimes, there are data stored directly in the <C>feature</C>-Object. The key of this members will be stored in <C>foreignMembers</C>. Look at this GeoJSON-Feature:
+      In GeoJSON, non-geometry-data should be stored under <C>property</C>. But sometimes, there will be information stored directly in the <C>feature</C>-Object. The keys of this custom members will be stored in <C>foreignMembers</C>. Look at this GeoJSON-Feature:
     </p>
     <Code hideClipboard={true}>
 {`{
@@ -64,13 +64,13 @@ function Specification() {
 }`}
     </Code>
     <p>
-      It contains <C>id</C> and <C>title</C>, which are not official GeoJSON-Members. The BrokJSON-<C>foreignMember</C>-Array will look like this:
+      It contains <C>id</C> and <C>title</C>. Both are not official GeoJSON-Members. The BrokJSON-<C>foreignMember</C>-Array will look like this:
     </p>
     <Code hideClipboard>["id", "title"]</Code>
 
     <h3>geometries (Array)</h3>
     <p>
-      <C>geometries</C> contains an array of <b>GeometryGroup</b>.
+      <C>geometries</C> contains an array of <C>GeometryGroup</C>.
     </p>
 
     <h3>GeometryGroup</h3>
@@ -78,7 +78,7 @@ function Specification() {
       Each <C>GeometryGroup</C> contains geometries of the same type (Points, Polygones, etc.). There can by more than one <C>GeometryGroup</C> with the same type! A <C>GeometryGroup</C> has two members, <C>type</C> and <C>features</C>, both required.<br />
     </p>
     <p>
-      <C>type:</C> The type of the geometry. The type must not be a valid GeoJSON-Type, BrokJSON copies every type.<br />
+      <C>type:</C> The type of the following geometries. The type must not be a valid GeoJSON-Type, BrokJSON copies every type.<br />
       <C>features:</C> Contains multiple BrokJSON-features. These features contains data like the geometries or the property-data.
     </p>
 
@@ -112,15 +112,16 @@ function Specification() {
     <Code hideClipboard={true}>
 {`{
   "geometries": [
-    {"type": "Point", "features": [
-      [[8.5402, 47.3782]],
-      [[8.5637, 47.4504]]
+    {"type": "Point", "features": [ // GeometryGroup
+      [[8.5402, 47.3782]], // Feature 1
+      [[8.5637, 47.4504]] // Feature 2
     ]}
   ]
 }`}
     </Code>
 
-    <b>Be aware: The order of features must be preserved!</b> It may be necessary to create multiple <C>GeometryGroups</C> of the same type. This GeoJSON-Example contains two Points and one MultiPoint. But the Points are not direct neighbors, they are interrupted by a MultiPoint-Feature.
+    <b>Be aware: The order of features must be preserved!</b> It MAY BE necessary to create multiple <C>GeometryGroups</C> of the same type.
+    This GeoJSON-Example contains two <C>Points</C> and one <C>MultiPoint</C>. But the Points are not direct neighbors, they are interrupted by a MultiPoint-Feature.
 
     <Code hideClipboard={true}>
 {`
@@ -168,20 +169,21 @@ function Specification() {
     </p>
     <p>
       <C>Index 0:</C><br />
-      The coordinates of the GeoJSON-Feature as it comes.
+      The coordinates of the GeoJSON-Feature as defined by GeoJSON
     </p>
     <p>
-      <C>Index 1:</C><br />
-      The properties values as an array. They MUST BE stored in the same order as the corresponding keys in the <C>properties</C>-Array at the beginning of the BrokJSON. It MAY NOT have the same length as the <C>properties</C>-Array. Does a GeoJSON-Feature not contains a key from BrokJSON-<C>features</C>, do not add it to the array. Contains the GeoJSON-Feature keys later in the BrokJSON-<C>features</C>-Array, add <C>null</C>-values. Converting a BrokJSON to GeoJSON, do not add these null-values to the GeoJSON.
+      <C>Index 1 (optional):</C><br />
+      The values of the properties as an array. They MUST BE stored in the same order as the corresponding keys in the <C>properties</C>-Array at the beginning of a BrokJSON.
+      It MAY NOT have the same length as the <C>properties</C>-Array. Does a GeoJSON-Feature not contains a key from BrokJSON-<C>features</C>, it will not be added to the array. Contains the GeoJSON-Feature keys later in the BrokJSON-<C>features</C>-Array, there will be added <C>null</C>-values. Converting a BrokJSON to GeoJSON, null-values will be skiped.
     </p>
     <p>
-      <C>Index 2:</C><br />
-      All other members of a feature like bbox or custom properties. They MUST BE stored in the same order as the corresponding keys in the <C>foreignMembers</C>-Array at the beginning of the BrokJSON. It MAY NOT have the same length as the <C>properties</C>-Array.
+      <C>Index 2 (optional):</C><br />
+      Contains all other members of a feature like bbox or custom properties as an array. They MUST BE stored in the same order as the corresponding keys in the <C>foreignMembers</C>-Array at the beginning of the BrokJSON. It MAY NOT have the same length as the <C>properties</C>-Array.
     </p>
 
     <p>
       <b>Example:</b><br />
-      Have a look at this GeoJSON-Feature. It contains foreignMembers ("name") and two properties.
+      Have a look at this GeoJSON-Feature. It contains foreignMembers ("name") and two properties ("id" and "title").
     </p>
     <Code hideClipboard={true}>
 {`{

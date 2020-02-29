@@ -47,16 +47,16 @@ function Home() {
   return (
     <div className='content'>
       <p>
-        Ever struggled with <b>huge GeoJSON-Files</b>? BrokJSON is your space-saving alternative! Depending on your data you can save up to 80%. Withouth losing any data! Why? Because it is based on the same ideas as GeoJSON but reduces redundancies. Look at this example:
+        Ever struggled with <b>huge GeoJSON-Files</b> for your web project? BrokJSON is your space-saving alternative! Depending on your data you can save up to 80%. <b>Withouth losing any information!</b> How? Because it is based on the same ideas as GeoJSON but reduces redundancies. Look at this example:
       </p>
-      <p>This <b>BrokJSON</b> contains two points and some data</p>
+      <p>This <b>BrokJSON</b> contains two points and data for each point.</p>
       <Code>{brokjson}</Code>
 
-      <p>The same data as a <b>GeoJSON</b>: Huge!</p>
+      <p>The same file as a <b>GeoJSON</b>: Huge!</p>
       <Code>{geojson}</Code>
 
       <p>
-        Get <b>BrokJSON</b> <Link to='/installation'>in your language!</Link>
+        Get <b>BrokJSON</b> <Link to='/installation'>for your system!</Link>
       </p>
        
     </div>

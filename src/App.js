@@ -19,7 +19,7 @@ function App() {
       <Router>
         <header>
           <h1>BrokJSON</h1>
-          <h2>The space saving GeoJSON-alternative</h2>
+          <h2>The space saving GeoJSON alternative</h2>
         </header>
         <nav>
          <NavLink activeClassName='active' to="/" exact={true}>Introduction</NavLink>&nbsp;|&nbsp;
