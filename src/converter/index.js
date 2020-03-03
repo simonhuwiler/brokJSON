@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Code from '../code'
-import {Link} from "react-router-dom";
 import brok from 'brokjson'
 import './style.scss';
 
@@ -74,20 +73,20 @@ function Converter() {
         <textarea id='data' placeholder='Paste your GeoJSON or BrokJSON here!' value={text} onChange={textareaChanged}></textarea>
       </div>
 
-      {validation == VALID.invalid &&
+      {validation === VALID.invalid &&
         <div className='invalid'>
           Invalid Input. Your Input is not a valid GeoJSON or BrokJSON.
         </div>
       }
 
-      {validation == VALID.brokjson &&
+      {validation === VALID.brokjson &&
         <>
           <h3>Here is your GeoJSON!</h3>
           <Code>{code}</Code>
         </>
       }
 
-      {validation == VALID.geojson &&
+      {validation === VALID.geojson &&
         <>
           <h3>Here is your BrokJSON!</h3>
           <Code>{code}</Code>

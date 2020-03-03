@@ -37,7 +37,7 @@ function App() {
 
         <footer>
           &copy; 2020 brokjson.dev<br />
-          Ideas to bring BrokJSON forward? Contact us! <a href='mailto:hello@brokjson.dev' target='_blank'>hello@brokjson.dev</a>
+          Ideas to bring BrokJSON forward? Contact us! <a href='mailto:hello@brokjson.dev' target='_blank' rel="noopener noreferrer">hello@brokjson.dev</a>
         </footer>
       </Router>
     </div>

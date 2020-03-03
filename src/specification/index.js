@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Code from '../code'
-import {Link} from "react-router-dom";
 import './style.scss';
 
 
@@ -10,7 +9,7 @@ function Specification() {
     <div id='specification' className='content'>
       <h2>Specification</h2>
       <p>
-        Every BrokJSON MUST BE a valid JSON object. BrokJSON uses the same way to store geographical information as GeoJSON. Therefore this specification will not describe Geometry Objects. See the <a href='https://tools.ietf.org/html/rfc7946' target='_blank'>GeoJSON Specification</a>. A BrokJSON-Converter is not interested in knowing the Geometry Object Type (Point, Polygone, etc.). It will just take Objects from GeoJSON and convert it to BrokJSON.
+        Every BrokJSON MUST BE a valid JSON object. BrokJSON uses the same way to store geographical information as GeoJSON. Therefore this specification will not describe Geometry Objects. See the <a href='https://tools.ietf.org/html/rfc7946' target='_blank' rel="noopener noreferrer">GeoJSON Specification</a>. A BrokJSON-Converter is not interested in knowing the Geometry Object Type (Point, Polygone, etc.). It will just take Objects from GeoJSON and convert it to BrokJSON.
       </p>
 
       <h3>The structure</h3>
