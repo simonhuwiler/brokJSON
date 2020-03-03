@@ -15,10 +15,10 @@ function Code(props)
   });
 
   const hideClipboard = props.hasOwnProperty('hideClipboard') ? props.hideClipboard : false;
-
+  const maxHeight = props.hasOwnProperty('maxHeight') ? props.maxHeight : 'auto';
   return (
     <pre style={{lineHeight: '1.5em'}}>
-      <code dangerouslySetInnerHTML={{ __html: hljs.highlight('javascript', props.children).value }} />
+      <code dangerouslySetInnerHTML={{ __html: hljs.highlight('javascript', props.children).value }} style={{maxHeight: maxHeight}}/>
       {!hideClipboard &&
         <span className='copyClipboard' onClick={() => copy(props.children)}>Copy to clipboard</span>
       }

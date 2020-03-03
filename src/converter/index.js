@@ -89,7 +89,7 @@ function Converter() {
       {validation === VALID.geojson &&
         <>
           <h3>Here is your BrokJSON!</h3>
-          <Code>{code}</Code>
+          <Code maxHeight='600px'>{code}</Code>
           <span className='minify' onClick={() => setMinify(true)}>&#x1F449; Minify BrokJSON</span>
         </>
       }
