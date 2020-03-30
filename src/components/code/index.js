@@ -5,7 +5,7 @@ import hljs from 'highlight.js/lib/highlight';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/tomorrow-night-eighties.css';
 
-import './style.scss';
+import './styles.scss';
 
 function Code(props)
 {

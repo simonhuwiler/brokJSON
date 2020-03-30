@@ -1,9 +1,10 @@
-import React from 'react';
-import Code from '../code'
-import {Link} from "react-router-dom";
+import React from "react"
+import { Link } from "gatsby"
 
-function Installation() {
-  return (
+import Layout from '../components/layout'
+import Code from '../components/code'
+
+export default () => <Layout>
     <div className='content'>
       <h2>Installation</h2>
       <p>
@@ -13,22 +14,22 @@ function Installation() {
       <Code hideClipboard={true}>npm install brokjson</Code>
         Or download sourcecode and <a href='https://github.com/simonhuwiler/brokJSON_js' target='_blank' rel="noopener noreferrer">install manually</a>.
       <p>
-      Further information:
-        <ul>
-          <li>npm: <a href='https://www.npmjs.com/package/brokjson' target='_blank' rel="noopener noreferrer">https://www.npmjs.com/package/brokjson</a></li>
-          <li>Source: <a href='https://www.github.com/simonhuwiler/brokJSON_js' target='_blank' rel="noopener noreferrer">https://www.github.com/simonhuwiler/brokJSON_js</a></li>
-        </ul>
+        Further information:
       </p>
+      <ul>
+        <li>npm: <a href='https://www.npmjs.com/package/brokjson' target='_blank' rel="noopener noreferrer">https://www.npmjs.com/package/brokjson</a></li>
+        <li>Source: <a href='https://www.github.com/simonhuwiler/brokJSON_js' target='_blank' rel="noopener noreferrer">https://www.github.com/simonhuwiler/brokJSON_js</a></li>
+      </ul>
 
       <h3>Python</h3>
       <Code hideClipboard={true}>pip install brokjson</Code>
       <p>
         Further information:
-        <ul>
-          <li>PyPi: <a href='https://www.pypi.org/project/brokJSON/' target='_blank' rel="noopener noreferrer">https://www.pypi.org/project/brokJSON/</a></li>
-          <li>Source: <a href='https://www.github.com/simonhuwiler/brokJSON_py' target='_blank' rel="noopener noreferrer">https://www.github.com/simonhuwiler/brokJSON_py</a></li>
-        </ul>
       </p>
+      <ul>
+        <li>PyPi: <a href='https://www.pypi.org/project/brokJSON/' target='_blank' rel="noopener noreferrer">https://www.pypi.org/project/brokJSON/</a></li>
+        <li>Source: <a href='https://www.github.com/simonhuwiler/brokJSON_py' target='_blank' rel="noopener noreferrer">https://www.github.com/simonhuwiler/brokJSON_py</a></li>
+      </ul>
 
       <h3>Other languages</h3>
       No converter for your prefered language? Write one, it's easy! See <Link to='/specification'>Specification</Link>.
@@ -131,7 +132,4 @@ map.on('load', () => {
 
        
     </div>
-  );
-}
-
-export default Installation;
+  </Layout>

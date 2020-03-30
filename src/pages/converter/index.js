@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import Code from '../code'
+
+import Layout from '../../components/layout'
+import Code from '../../components/code'
 import brok from 'brokjson'
-import './style.scss';
+import './styles.scss';
 
 const stringify = require("json-stringify-pretty-compact");
 
@@ -67,36 +69,38 @@ function Converter() {
   }
 
   return (
+    <Layout>
     <div id='converter' className='content'>
-      <h2>Convert your GeoJSON or BrokJSON</h2>
-      <div className='outer'>
-        <textarea id='data' placeholder='Paste your GeoJSON or BrokJSON here!' value={text} onChange={textareaChanged}></textarea>
-      </div>
+          <h2>Convert your GeoJSON or BrokJSON</h2>
+          <div className='outer'>
+            <textarea id='data' placeholder='Paste your GeoJSON or BrokJSON here!' value={text} onChange={textareaChanged}></textarea>
+          </div>
 
-      {validation === VALID.invalid &&
-        <div className='invalid'>
-          Invalid Input. Your Input is not a valid GeoJSON or BrokJSON.
+          {validation === VALID.invalid &&
+            <div className='invalid'>
+              Invalid Input. Your Input is not a valid GeoJSON or BrokJSON.
+            </div>
+          }
+
+          {validation === VALID.brokjson &&
+            <>
+              <h3>Here is your GeoJSON!</h3>
+              <Code>{code}</Code>
+            </>
+          }
+
+          {validation === VALID.geojson &&
+            <>
+              <h3>Here is your BrokJSON!</h3>
+              <Code maxHeight='600px'>{code}</Code>
+              <span className='minify' onClick={() => setMinify(true)}>&#x1F449; Minify BrokJSON</span>
+            </>
+          }
+          
         </div>
-      }
+    </Layout>
+  )
 
-      {validation === VALID.brokjson &&
-        <>
-          <h3>Here is your GeoJSON!</h3>
-          <Code>{code}</Code>
-        </>
-      }
-
-      {validation === VALID.geojson &&
-        <>
-          <h3>Here is your BrokJSON!</h3>
-          <Code maxHeight='600px'>{code}</Code>
-          <span className='minify' onClick={() => setMinify(true)}>&#x1F449; Minify BrokJSON</span>
-        </>
-      }
-
-       
-    </div>
-  );
 }
 
 export default Converter;
