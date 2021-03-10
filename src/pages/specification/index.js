@@ -20,11 +20,11 @@ function Specification() {
         </p>
       
         <Code hideClipboard={true}>
-  {`{
-    "properties": [],
-    "foreignMembers": [],
-    "geometries": []
-  }`}
+{`{
+  "properties": [],
+  "foreignMembers": [],
+  "geometries": []
+}`}
         </Code>
 
         <h3>properties (Array, optional)</h3>
@@ -35,15 +35,16 @@ function Specification() {
           This GeoJSON-Feature...
         </p>
         <Code hideClipboard={true}>
-  {`"features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "prop1": 1,
-        "prop2": 2
-      },
-      "geometry": {/* ... */}
-    }`}
+{`"features": [
+  {
+    "type": "Feature",
+    "properties": {
+      "prop1": 1,
+      "prop2": 2
+    },
+    "geometry": {/* ... */}
+  }
+]`}
         </Code>
 
       <p>... leads to this BrokJSON-<C>property</C>-Array:</p>
@@ -56,13 +57,13 @@ function Specification() {
         In GeoJSON, non-geometry-data should be stored under <C>property</C>. But sometimes, there will be information stored directly in the <C>feature</C>-Object. The keys of this custom members will be stored in <C>foreignMembers</C>. Look at this GeoJSON-Feature:
       </p>
       <Code hideClipboard={true}>
-  {`{
-    "type": "Feature",
-    "properties": { /* ... */},
-    "id": 4,
-    "title": "The Univers",
-    "geometry": { /* ... */ }
-  }`}
+{`{
+  "type": "Feature",
+  "properties": { /* ... */},
+  "id": 4,
+  "title": "The Univers",
+  "geometry": { /* ... */ }
+}`}
       </Code>
       <p>
         It contains <C>id</C> and <C>title</C>. Both are not official GeoJSON-Members. The BrokJSON-<C>foreignMember</C>-Array will look like this:
@@ -89,79 +90,79 @@ function Specification() {
       </p>
 
       <Code hideClipboard={true}>
-  {`{
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [8.5402,47.3782]
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [8.5637,47.4504]
-        }
+{`{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.5402,47.3782]
       }
-    ]
-  }`}
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.5637,47.4504]
+      }
+    }
+  ]
+}`}
       </Code>
       And the corresponding BrokJSON:
       <Code hideClipboard={true}>
-  {`{
-    "geometries": [
-      {"type": "Point", "features": [ // GeometryGroup
-        [[8.5402, 47.3782]], // Feature 1
-        [[8.5637, 47.4504]] // Feature 2
-      ]}
-    ]
-  }`}
+{`{
+  "geometries": [
+    {"type": "Point", "features": [ // GeometryGroup
+      [[8.5402, 47.3782]], // Feature 1
+      [[8.5637, 47.4504]] // Feature 2
+    ]}
+  ]
+}`}
       </Code>
 
       <b>Be aware: The order of features must be preserved!</b> It MAY BE necessary to create multiple <C>GeometryGroups</C> of the same type.
       This GeoJSON-Example contains two <C>Points</C> and one <C>MultiPoint</C>. But the Points are not direct neighbors, they are interrupted by a MultiPoint-Feature.
 
       <Code hideClipboard={true}>
-  {`
-    "type": "FeatureCollection",
-    "features": [
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [8.5402,47.3782]
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "MultiPoint",
-                "coordinates": [[8.5637,47.4504]]
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [8.5637,47.4504]
-            }
-        }
-    ]
-  }`}
+{`
+  "type": "FeatureCollection",
+  "features": [
+      {
+          "type": "Feature",
+          "geometry": {
+              "type": "Point",
+              "coordinates": [8.5402,47.3782]
+          }
+      },
+      {
+          "type": "Feature",
+          "geometry": {
+              "type": "MultiPoint",
+              "coordinates": [[8.5637,47.4504]]
+          }
+      },
+      {
+          "type": "Feature",
+          "geometry": {
+              "type": "Point",
+              "coordinates": [8.5637,47.4504]
+          }
+      }
+  ]
+}`}
       </Code>
 
       The corresponding BrokJSON will therefore have three <C>GeometryGroups</C>.
       <Code hideClipboard={true}>
-  {`{
-    "geometries": [
-      {"type": "Point", "features": [[[8.5402, 47.3782]]]},
-      {"type": "MultiPoint", "features": [[[[8.5637, 47.4504]]]]},
-      {"type": "Point", "features": [[[8.5637, 47.4504]]]}
-    ]
-  }`}
+{`{
+  "geometries": [
+    {"type": "Point", "features": [[[8.5402, 47.3782]]]},
+    {"type": "MultiPoint", "features": [[[[8.5637, 47.4504]]]]},
+    {"type": "Point", "features": [[[8.5637, 47.4504]]]}
+  ]
+}`}
       </Code>
 
       <h3>BrokJSON-Feature</h3>
@@ -187,27 +188,27 @@ function Specification() {
         Have a look at this GeoJSON-Feature. It contains foreignMembers ("name") and two properties ("id" and "title").
       </p>
       <Code hideClipboard={true}>
-  {`{
-    "type": "Feature",
-    "name": "Georg",
-    "properties": {
-      "id": 1,
-      "title": "Hello world"
-    },
-    "geometry": {
-      "type": "Point",
-      "coordinates": [8.5402,47.3782]
-    }
-  }`}
+{`{
+  "type": "Feature",
+  "name": "Georg",
+  "properties": {
+    "id": 1,
+    "title": "Hello world"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [8.5402,47.3782]
+  }
+}`}
       </Code>
 
       The corresponding BrokJSON-<C>feature</C> looks like this:
       <Code hideClipboard={true}>
-  {`[
-    [8.5402, 47.3782], // Index 0: The coordinates
-    [1,"Hello world"], // Index 1: The values of the properties, corresponding to the keys in "properties"
-    ["Georg"] // Index 2: The values of all unknown members, corresponding to the keys in "foreignMembers"
-  ]`}
+{`[
+  [8.5402, 47.3782], // Index 0: The coordinates
+  [1,"Hello world"], // Index 1: The values of the properties, corresponding to the keys in "properties"
+  ["Georg"] // Index 2: The values of all unknown members, corresponding to the keys in "foreignMembers"
+]`}
       </Code>
 
       <h3>GeometryCollections</h3>
@@ -219,44 +220,44 @@ function Specification() {
         Have a look at this BrokJSON. It contains a <C>GeometryCollection</C>. The <C>GeometryCollection</C> contains two <C>GeometryGroups</C>, <C>Point</C> and <C>LineString</C>.
       </p>
       <Code hideClipboard={true}>
-  {`{
-    "props": [],
-    "geometries": [
+{`{
+  "props": [],
+  "geometries": [
+    {
+      "type": "GeometryCollection",
+      "features": [{
+        "type": "Point",
+        "features": [
+          [[100, 0.0]]
+        ]
+      },
       {
-        "type": "GeometryCollection",
-        "features": [{
-          "type": "Point",
-          "features": [
-            [[100, 0.0]]
-          ]
-        },
-        {
-          "type": "LineString",
-          "features": [
-            [[101.0, 0.0],[102.0, 1.0]]
-          ]
-        }]
-    }]
-  }`}
+        "type": "LineString",
+        "features": [
+          [[101.0, 0.0],[102.0, 1.0]]
+        ]
+      }]
+  }]
+}`}
       </Code>
 
       <h3>Unknown Properties</h3>
       BrokJSON will adopt every unknown property on the root node. The following GeoJSON contains an unspecified member called <C>myCustomProperty</C>.
 
       <Code hideClipboard={true}>
-  {`{
-    "type": "FeatureCollection",
-    "myCustomProperty": "I love frogs!",
-    "features": []
-  }`}
+{`{
+  "type": "FeatureCollection",
+  "myCustomProperty": "I love frogs!",
+  "features": []
+}`}
       </Code>
 
       This custom property will be stored the same way in a BrokJSON:
       <Code hideClipboard={true}>
-  {`{
-    "myCustomProperty": "I love frogs!",
-    "geometries": []
-  }`}
+{`{
+  "myCustomProperty": "I love frogs!",
+  "geometries": []
+}`}
       </Code>
 
       <h3>featureCollection</h3>
