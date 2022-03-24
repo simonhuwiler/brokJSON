@@ -31,6 +31,16 @@ export default () => <Layout>
         <li>Source: <a href='https://www.github.com/simonhuwiler/brokJSON_py' target='_blank' rel="noopener noreferrer">https://www.github.com/simonhuwiler/brokJSON_py</a></li>
       </ul>
 
+      <h3>Ruby</h3>
+      <Code hideClipboard={true}>gem install brokjson</Code>
+      <p>
+        Further information:
+      </p>
+      <ul>
+        <li>Rubygems: <a href='https://rubygems.org/gems/brokjson' target='_blank' rel="noopener noreferrer">https://rubygems.org/gems/brokjson</a></li>
+        <li>Source: <a href='https://github.com/jimmyasyraf/brokJSON_rb' target='_blank' rel="noopener noreferrer">https://github.com/jimmyasyraf/brokJSON_rb</a></li>
+      </ul>
+
       <h3>Other languages</h3>
       No converter for your prefered language? Write one, it's easy! See <Link to='/specification'>Specification</Link>.
 
