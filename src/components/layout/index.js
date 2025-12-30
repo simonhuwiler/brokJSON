@@ -28,8 +28,8 @@ export default ({ children }) => (
     </Switch> */}
 
     <footer>
-      &copy; 2020 brokjson.dev<br />
-      Ideas to bring BrokJSON forward? Contact us! <a href='mailto:hello@brokjson.dev' target='_blank' rel="noopener noreferrer">hello@brokjson.dev</a>
+      &copy; 2026 brokjson.dev<br />
+      Ideas to bring BrokJSON forward? Contact us! <a href='mailto:simon.huwiler@nzz.ch' target='_blank' rel="noopener noreferrer">simon.huwiler@nzz.ch</a>
     </footer>
   </div>
 )
