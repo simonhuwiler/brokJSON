@@ -17,6 +17,7 @@
     "brokjson": "0.0.4",
     "copy-to-clipboard": "^3.3.1",
     "gatsby": "^2.19.45",
+    "gatsby-plugin-google-fonts-v2": "^1.0.1",
     "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
     "gatsby-plugin-react-helmet": "^3.2.1",
     "gatsby-plugin-sass": "^2.2.1",

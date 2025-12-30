@@ -10,21 +10,17 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts-v2`,
       options: {
         fonts: [
           {
-            family: `Oxanium`,
-            variants: [`200`]
+            family: `Oxanium:wght@200`,
           },
           {
-            family: `Raleway`,
-            variants: [`400`, '700'],
-            subsets: [`latin`]
-          },
-        ],
-      },
-    }  
+            family: `Raleway:wght@400;700`,
+          }
+        ]
+      }
+    }
   ]
 }
-1
